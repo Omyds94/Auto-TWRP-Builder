@@ -1,0 +1,94 @@
+#line 1 "device/sprd/sys_sepolicy/system_ext/private/service_contexts"
+# add for srmi
+srmi                                      u:object_r:srmi_service:s0
+vendor.unisoc.frameworks.srmi.ISrmiManager/default      u:object_r:fwk_srmi_service:s0
+#for led notification
+ledsrv                                    u:object_r:led_service:s0
+
+addon                                     u:object_r:addon_service:s0
+# add for power
+powerguru                                 u:object_r:powerguru_service:s0
+power_ex                                  u:object_r:power_ex_service:s0
+sprd_power                                u:object_r:power_ex_service:s0
+sunlight                                  u:object_r:power_ex_service:s0
+lld                                       u:object_r:power_ex_service:s0
+# add for ssense
+SceneRecognize                            u:object_r:ssense_service:s0
+sprdssense                                u:object_r:ssense_service:s0
+
+# add for ccsa
+security                                  u:object_r:security_service:s0
+connectionEx                              u:object_r:connectionEx_service:s0
+network_adapter                           u:object_r:networkadapter_service:s0
+# add for fm
+
+# add for tele
+iphonesubinfoEx                           u:object_r:radio_service:s0
+phone_ex                                  u:object_r:radio_service:s0
+ismsEx                                    u:object_r:radio_service:s0
+ims_ex                                    u:object_r:radio_service:s0
+ims_ut_ex                                 u:object_r:radio_service:s0
+ims_doze_manager                          u:object_r:radio_service:s0
+simphonebookEx                            u:object_r:radio_service:s0
+irit                                      u:object_r:radio_service:s0
+phone_dmyk                                u:object_r:radio_service:s0
+ions_ex                                   u:object_r:radio_service:s0
+
+#fow unisocai
+unisocai                                  u:object_r:unisoc_ai_service:s0
+
+# add for audioserviceex
+audio_ex                                  u:object_r:audio_ex_service:s0
+
+## add for UniWifiService
+uni_wifi                                  u:object_r:uni_wifi_service:s0
+
+#add for UniEvent
+unisoc_event                              u:object_r:unisoc_event_service:s0
+
+## add for remotedisplayService
+remotedisplay				u:object_r:remotedisplay_service:s0
+
+## add for UnisocProxyService
+unisoc_proxy                              u:object_r:unisoc_proxy_service:s0
+
+#for smartlink linkturbonative
+linkturbonative                           u:object_r:linkturbonative_service:s0
+SmartlinkSdkService                       u:object_r:smartlink_service:s0
+
+#for media fm
+fm                                        u:object_r:mediaserver_service:s0
+
+#for unipnp
+unipnp                                    u:object_r:unipnp_service:s0
+
+#for security ifaa
+ifaa                                      u:object_r:ifaa_service:s0
+
+#for unisocaiengine
+unisocaiengine                            u:object_r:unisocaiengine_service:s0
+
+#for silentreboot
+unisoc_silent_reboot      u:object_r:unisoc_silent_reboot_service:s0
+
+# Add UNISOC extended telephony services.
+uni_telephony                             u:object_r:radio_service:s0
+uni_phone                                 u:object_r:radio_service:s0
+uni_carrierconfig                         u:object_r:radio_service:s0
+uni_simphonebook                          u:object_r:radio_service:s0
+tele_test_service                         u:object_r:radio_service:s0
+isim_test_service                         u:object_r:radio_service:s0
+operator_name_test_service                u:object_r:radio_service:s0
+simrecords_test_service                   u:object_r:radio_service:s0
+subinfo_test_service                      u:object_r:radio_service:s0
+simfilecontent_test_service               u:object_r:radio_service:s0
+simfilelength_test_service                u:object_r:radio_service:s0
+simfilenotfound_test_service              u:object_r:radio_service:s0
+modemLog_test_service                     u:object_r:radio_service:s0
+ss_test_service                           u:object_r:radio_service:s0
+unidatanetwork_test_service               u:object_r:radio_service:s0
+
+# add for CTA feature
+cta_permission                            u:object_r:cta_permission_service:s0
+
+

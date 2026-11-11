@@ -1,0 +1,25 @@
+# Blackview Active 5 (ums9230_6h10) - TWRP 14.1
+# Block-device, mount-point, filesystem, filesystem mount options, TWRP flags.
+
+/dev/block/by-name/boot /boot emmc defaults flags=display=Boot,slotselect,backup
+/dev/block/by-name/init_boot /init_boot emmc defaults flags=display=Init_Boot,slotselect,backup
+/dev/block/by-name/vendor_boot /vendor_boot emmc defaults flags=display=Vendor_Boot,slotselect,backup
+/dev/block/by-name/dtbo /dtbo emmc defaults flags=display=DTBO,slotselect,backup
+/dev/block/by-name/vbmeta /vbmeta emmc defaults flags=display=VBMeta,slotselect,backup
+/dev/block/by-name/vbmeta_system /vbmeta_system emmc defaults flags=display=VBMeta_System,slotselect,backup
+/dev/block/by-name/vbmeta_vendor /vbmeta_vendor emmc defaults flags=display=VBMeta_Vendor,slotselect,backup
+/dev/block/by-name/vbmeta_product /vbmeta_product emmc defaults flags=display=VBMeta_Product,slotselect,backup
+/dev/block/by-name/vbmeta_odm /vbmeta_odm emmc defaults flags=display=VBMeta_ODM,slotselect,backup
+/dev/block/by-name/vbmeta_system_ext /vbmeta_system_ext emmc defaults flags=display=VBMeta_System_Ext,slotselect,backup
+
+system /system erofs ro flags=display=System,logical,slotselect
+system_ext /system_ext erofs ro flags=display=System_Ext,logical,slotselect
+vendor /vendor erofs ro flags=display=Vendor,logical,slotselect
+odm /odm erofs ro flags=display=ODM,logical,slotselect
+product /product erofs ro flags=display=Product,logical,slotselect
+vendor_dlkm /vendor_dlkm erofs ro flags=display=Vendor_DLKM,logical,slotselect
+system_dlkm /system_dlkm erofs ro flags=display=System_DLKM,logical,slotselect
+
+/dev/block/by-name/metadata /metadata f2fs nodev,noatime,nosuid flags=display=Metadata
+/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065,inline_xattr,inline_data,inlinecrypt,fsync_mode=nobarrier,atgc,reservedsize=128M,checkpoint=fs flags=display=Data,keydirectory=/metadata/vold/metadata_encryption,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized
+/dev/block/by-name/cache /cache f2fs noatime,nosuid,nodev,discard flags=display=Cache

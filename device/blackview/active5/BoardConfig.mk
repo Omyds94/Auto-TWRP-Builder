@@ -1,0 +1,185 @@
+#
+# Copyright (C) 2026 The Android Open Source Project
+# Copyright (C) 2026 SebaUbuntu's TWRP device tree generator
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+DEVICE_PATH := device/blackview/active5
+
+# Generated from Android 15 stock properties.
+# Use this tree with the twrp-14.1 source branch.
+ALLOW_MISSING_DEPENDENCIES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 := 
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a75
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
+
+TARGET_CPU_SMP := true
+ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
+DEXPREOPT_GENERATE_APEX_IMAGE := true
+
+# Bootloader and Unisoc platform
+TARGET_BOOTLOADER_BOARD_NAME := ums9230_6h10
+TARGET_NO_BOOTLOADER := true
+TARGET_BOARD_PLATFORM := ums9230
+BOARD_USES_SPRD_HARDWARE := true
+
+TARGET_SCREEN_DENSITY := 213
+TARGET_SCREEN_WIDTH := 800
+TARGET_SCREEN_HEIGHT := 1340
+
+# vendor_boot header fields from the stock image. The kernel remains in boot.img.
+TARGET_NO_KERNEL := true
+TARGET_KERNEL_ARCH := arm64
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+BOARD_PREBUILT_DTBIMAGE := $(TARGET_PREBUILT_DTB)
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_SECOND_OFFSET := 0x00000000
+BOARD_RAMDISK_OFFSET := 0x05400000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_DTB_OFFSET := 0x01f00000
+BOARD_VENDOR_CMDLINE := console=ttyS1,115200n8 bootconfig bootconfig
+
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+BOARD_MKBOOTIMG_ARGS += --vendor_cmdline "$(BOARD_VENDOR_CMDLINE)"
+BOARD_BOOTCONFIG += \
+    androidboot.hardware=ums9230_6h10
+
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_VENDOR_RAMDISK_USE_LZ4 := true
+
+TARGET_NO_RECOVERY := true
+BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
+BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
+
+# Partitions
+BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
+BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 104857600
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+TARGET_USERIMAGES_USE_EROFS := true
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_SYSTEM_EXT := system_ext
+TARGET_COPY_OUT_ODM := odm
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
+TARGET_COPY_OUT_SYSTEM_DLKM := system_dlkm
+
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS += \
+    vendor_boot
+AB_OTA_PARTITIONS += \
+    dtbo
+AB_OTA_PARTITIONS += \
+    system_ext
+AB_OTA_PARTITIONS += \
+    odm
+AB_OTA_PARTITIONS += \
+    system
+AB_OTA_PARTITIONS += \
+    vbmeta_vendor
+AB_OTA_PARTITIONS += \
+    vbmeta_system
+AB_OTA_PARTITIONS += \
+    vendor
+AB_OTA_PARTITIONS += \
+    vendor_dlkm
+AB_OTA_PARTITIONS += \
+    system_dlkm
+AB_OTA_PARTITIONS += \
+    product
+AB_OTA_PARTITIONS += \
+    vbmeta
+AB_OTA_PARTITIONS += \
+    boot
+
+
+BOARD_USES_METADATA_PARTITION := true
+
+# Recovery and verified boot
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+# vendor_boot's root filesystem is read-only. Avoid staging a discovered fstab
+# at /etc/additional.fstab, which otherwise restarts recovery before the GUI.
+TW_SKIP_ADDITIONAL_FSTAB := true
+BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 3
+BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX := 0
+BOARD_AVB_VENDOR_BOOT_ROLLBACK_INDEX_LOCATION := 0
+
+# Platform version is read from prop.default, never hard-coded.
+PLATFORM_VERSION := 15
+PLATFORM_SECURITY_PATCH := 2025-06-05
+VENDOR_SECURITY_PATCH := 2025-06-05
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+
+# TWRP configuration
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_LIBRESETPROP := true
+TW_THEME := portrait_hdpi
+TW_EXTRA_LANGUAGES := true
+TW_DEFAULT_LANGUAGE := zh_CN
+TW_USE_TOOLBOX := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+# The supplied vendor_boot contains no /vendor subtree. Mount the real logical
+# /vendor partition so KeyMint/Trusty services and vendor libraries can be found.
+TW_USES_VENDOR_LIBS := true
+# A stock vendor policy was retained. Regenerate it with tools/patch_stock_sepolicy.sh
+# and a libsepol-backed SEPOLICY_PATCHER, so init and recovery run permissively.
+TW_SUPPORT_SC27XX_INPUT_HAPTICS := true
+TW_NO_FLASH_CURRENT_TWRP := true
+TW_DEVICE_VERSION := Blackview Active 5
+TW_INTERNAL_STORAGE_PATH := /data/media/0
+TW_DRM_LEGACY_MODESET := true
+# Recovery modules are loaded by first-stage init from the stock
+# /lib/modules/modules.load.recovery file in the vendor ramdisk, before
+# first-stage fstab mounts. Keep modules.dep and the complete module set intact.
+# Do not enable TW_LOAD_VENDOR_MODULES here: that TWRP userspace loader runs
+# after Process_Fstab and is not the mechanism that makes UFS available to
+# first-stage init.
+
+# The stock Unisoc boot-control HAL is not part of the generated tree.
+TARGET_EXCLUDE_BOOTCTRL := true
+TARGET_NO_UPDATE_ENGINE := true
+TARGET_NO_RECOVERY_UPDATE_ENGINE := true
+USE_GENERIC_BOOTCTRL_HEADERS := true
+BOARD_BOOTCTRL_HEADER_VERSION := 0
+TARGET_BOOTCTRL_DISABLE := true
+TARGET_BOARD_PLATFORM_NO_BOOTCTRL := true
+TW_NO_FASTBOOT_BOOT := true
